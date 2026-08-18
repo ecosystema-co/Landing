@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --color-black: #050505;
+  --color-white: #ffffff;
+  --color-light-grey: #f3f3f3;
+  --color-dark-grey: #1a1a1a;
+  --color-text-muted: #8f8f8f;
+  
+  /* Ecosystema Brand Colors */
+  --color-brand-green: #10b981;
+  --color-brand-blue: #3b82f6;
+  --color-brand-orange: #f97316;
+
+  --font-main: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+/* Typography */
+.huge-text {
+  font-size: 22vw;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 8vh;
+  color: var(--color-white);
+}
+
+.title-lg {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.title-md {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.text-grey {
+  color: var(--color-text-muted);
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Header & Nav */
+.header {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  padding: 2rem 4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  z-index: 1001;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links a {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--color-white);
+  color: var(--color-black);
+  padding: 0.8rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+.btn-primary:hover {
+  background: var(--color-brand-green);
+  color: var(--color-white);
+}
+
+/* Scrolled Header State */
+.header.scrolled {
+  padding: 1rem 4vw;
+}
+.header.scrolled .nav-links {
+  background: var(--color-white);
+  padding: 0.75rem 2rem;
+  border-radius: 100px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.header.scrolled .nav-links a {
+  color: var(--color-black);
+}
+.header.scrolled .nav-links a:hover {
+  color: var(--color-brand-blue);
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 5vh;
+}
+/* Subtle background texture/gradient */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: -10%; width: 50%; height: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(0,0,0,0) 70%);
+  z-index: -1;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+.stat-item {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+.hero-text h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.hero-text p {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+}
+
+/* SECTIONS (Alternating Dark/Light) */
+.section {
+  padding: 15vh 0;
+}
+
+.bg-light {
+  background-color: var(--color-light-grey);
+  color: var(--color-black);
+}
+.bg-light .label {
+  color: #666;
+}
+
+/* SECTION LAYOUT (The 3-column brutalist row) */
+.row-layout {
+  display: grid;
+  grid-template-columns: 1fr 4fr 3fr;
+  gap: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 4rem 0;
+}
+.row-layout:last-child {
+  border-bottom: none;
+}
+.bg-light .row-layout {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Projects (Light) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.project-card {
+  display: block;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: var(--color-white);
+  padding: 1rem;
+  transition: transform 0.4s ease;
+}
+.project-card:hover {
+  transform: translateY(-10px);
+}
+.project-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1.5rem;
+}
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem 1rem;
+}
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Services (Dark) */
+.service-content h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.service-content p {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  max-width: 400px;
+}
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.tag {
+  padding: 0.5rem 1rem;
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.service-img {
+  width: 150px;
+  height: 200px;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  margin-left: auto;
+}
+
+/* About (Light) */
+.about-content h2 {
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+.about-desc {
+  font-size: 1.25rem;
+  max-width: 600px;
+  color: #444;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .row-layout {
+    grid-template-columns: 1fr 5fr;
+  }
+  .row-layout > div:last-child {
+    display: none; /* Hide tags/images on tablet for simplicity */
+  }
+  .huge-text {
+    font-size: 20vw;
+  }
+}
+@media (max-width: 768px) {
+  .header { padding: 1rem 4vw; }
+  .nav-links { display: none; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .row-layout { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .huge-text { margin-top: 15vh; font-size: 24vw; }
+}
