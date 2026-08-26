@@ -5,11 +5,13 @@ const PROJECTS = [
     title: 'Blooma.io',
     year: '2024',
     category: 'SaaS · Diseño por suscripción',
+    desc: 'Gestor de proyectos de diseño y desarrollo para empresas y freelance.',
     description:
       'Gestor de proyectos de diseño y desarrollo tanto para empresas como para freelance donde encontrarás todo lo necesario para tus trabajos, proyectos y ofertas.',
-    tags: ['UI/UX', 'Plataforma Web', 'Créditos & Pagos', 'Branding'],
+    tags: ['Next.js', 'Spring Boot', 'PostgreSQL'],
     url: 'https://blooma.io',
     cover: '/projects/blooma/landing1.png',
+    wide: true,
     gallery: [
       '/projects/blooma/landing1.png',
       '/projects/blooma/landing2.png',
@@ -36,11 +38,13 @@ const PROJECTS = [
     title: 'Inspecol',
     year: '2026',
     category: 'Web corporativa · Inspección de gas',
+    desc: 'Landing de inspección y certificación de instalaciones de gas natural y GLP.',
     description:
       'Landing de inspección y certificación de instalaciones de gas natural y GLP, con envío de PQRS directo al correo empresarial y múltiples canales de contacto para agendar inspecciones y citas.',
-    tags: ['Sitio Corporativo', 'Formulario PQRS', 'WhatsApp', 'Normativa'],
+    tags: ['Next.js', 'Hostinger', 'WhatsApp API'],
     url: 'https://inspecol.com',
     cover: '/projects/inspecol/5.png',
+    wide: false,
     gallery: [
       '/projects/inspecol/5.png',
       '/projects/inspecol/sec.png',
@@ -48,6 +52,42 @@ const PROJECTS = [
       '/projects/inspecol/3.png',
       '/projects/inspecol/4.png',
       '/projects/inspecol/6.png',
+    ],
+  },
+  {
+    slug: 'mercaqta',
+    title: 'MercaQTA',
+    year: '2025',
+    category: 'E-commerce · Logística integrada',
+    desc: 'Plataforma e-commerce con logística integrada para el Caquetá.',
+    description:
+      'Plataforma de comercio electrónico diseñada para negocios del Caquetá, con sistema de pagos integrado, gestión de inventario y rastreo de envíos en tiempo real.',
+    tags: ['Flutter', 'FastAPI', 'PostgreSQL'],
+    url: '#',
+    cover: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80',
+    wide: false,
+    gallery: [
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    ],
+  },
+  {
+    slug: 'flettero',
+    title: 'Flettero Logística',
+    year: '2025',
+    category: 'Sistema logístico · Rastreo GPS',
+    desc: 'Sistema de gestión logística y rastreo GPS en tiempo real.',
+    description:
+      'Plataforma de gestión logística con rastreo GPS en tiempo real, optimización de rutas y administración de flota para empresas de transporte y distribución.',
+    tags: ['Next.js', 'Python', 'AWS'],
+    url: '#',
+    cover: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+    wide: true,
+    gallery: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=800&q=80',
     ],
   },
 ];
@@ -86,16 +126,23 @@ const projectsGrid = document.getElementById('projects-grid');
 
 projectsGrid.innerHTML = PROJECTS.map(
   project => `
-    <article class="project-card" tabindex="0" role="button" data-slug="${project.slug}" aria-haspopup="dialog" aria-label="Ver detalle del proyecto ${project.title}">
-      <div class="project-media">
+    <a href="#" class="project-card${project.wide ? ' project-card--wide' : ''} reveal" tabindex="0" role="button" data-slug="${project.slug}" aria-haspopup="dialog" aria-label="Ver detalle del proyecto ${project.title}">
+      <div class="project-img">
         <img src="${project.cover}" alt="Vista previa del proyecto ${project.title}" loading="lazy">
-        <span class="project-hint">Ver proyecto ↗</span>
+        <div class="project-overlay">
+          <span class="project-view">Ver proyecto →</span>
+        </div>
       </div>
       <div class="project-info">
-        <h3 class="project-title">${project.title}</h3>
-        <span class="label">${project.year}</span>
+        <div>
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-desc">${project.desc}</p>
+        </div>
+        <div class="project-tags">
+          ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+        </div>
       </div>
-    </article>
+    </a>
   `
 ).join('');
 
@@ -149,6 +196,7 @@ function closeProjectModal() {
 }
 
 projectsGrid.addEventListener('click', event => {
+  event.preventDefault();
   const card = event.target.closest('.project-card');
   if (card) openProjectModal(card.dataset.slug);
 });
