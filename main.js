@@ -255,11 +255,12 @@ function initContactForm() {
       btn.style.color = '';
       btn.disabled = false;
       form.reset();
+      '/projects/inspecol/radicar.png'
     }, 3000);
   });
 }
 
-// ─── INIT ───
+// ?????? INIT ??????
 document.addEventListener('DOMContentLoaded', () => {
   initHeroReveal();
   initScrollReveal();
@@ -271,4 +272,215 @@ document.addEventListener('DOMContentLoaded', () => {
   initParticles();
   initHeroParallax();
   initContactForm();
+  initProjectsModal();
 });
+
+// ==========================================
+// PROJECTS & MODAL LOGIC
+// ==========================================
+
+const PROJECTS = [
+  {
+    slug: 'loop-rave',
+    title: 'Loop Rave',
+    year: '2024',
+    category: 'Plataforma de Eventos · Tiquetera Web',
+    description: 'Alianza tecnologica completa para Loop Rave, uno de los eventos de musica electronica mas importantes de la region. Desarrollamos el sitio de descubrimiento de eventos y la tiquetera online con React y TypeScript, integramos chatbots con IA para atencion al publico, brindamos soporte logistico en sitio, produccion fotografica y video, y beats para sus promociones en redes.',
+    tags: ['React', 'TypeScript', 'Full-Stack', 'IA Chatbots', 'Produccion Audiovisual', 'Logistica'],
+    url: 'https://looprave.net',
+    cover: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1470229722913-7c092fb15a20?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1571266028243-cb40f542a598?auto=format&fit=crop&w=800&q=80'
+    ],
+    isWide: true
+  },
+  {
+    slug: 'gol-manager',
+    title: 'Gol Manager',
+    year: '2023',
+    category: 'App Movil · Gestion Deportiva',
+    description: 'Gol Manager Free es la app para la gestion integral de equipos de futbol amateur. Con ella, entrenadores y directivos pueden registrar plantillas completas, agendar partidos, llevar el marcador en tiempo real, administrar estadisticas por jugador y organizar torneos completos. Aportamos en tareas de soporte tecnico y mantenimiento para su version publicada en Google Play.',
+    tags: ['Flutter', 'Android', 'Google Play', 'Soporte Tecnico'],
+    url: 'https://play.google.com/store/apps/details?id=com.golmanagerfree&hl=es&pli=1',
+    cover: '/projects/gol-manager/cover.png',
+    gallery: [
+      '/projects/gol-manager/cover.png',
+      '/projects/gol-manager/screens.png',
+      '/projects/gol-manager/slide1.png',
+      '/projects/gol-manager/slide2.png'
+    ]
+  },
+  {
+    slug: 'branddu',
+    title: 'Branddu',
+    year: '2024',
+    category: 'Frontend · Plataforma de Merchandising B2B',
+    description: 'Branddu es la plataforma colombiana que transforma ideas en experiencias de marca memorables a traves del merchandising corporativo. Realizamos el desarrollo frontend y la maquetacion web de alta fidelidad para su portal, permitiendo a las empresas cotizar, personalizar y ordenar productos promocionales como mugs, ropa corporativa, tech gadgets y articulos eco-amigables, todo en linea y en minutos. Trabajo realizado en colaboracion con Arepa Technologies.',
+    tags: ['JavaScript', 'CSS', 'Frontend', 'E-commerce B2B', 'Arepa Technologies'],
+    url: 'https://branddu.com/',
+    cover: '/projects/branddu/cover.png',
+    gallery: [
+      '/projects/branddu/cover.png',
+      '/projects/branddu/scroll1.png',
+      '/projects/branddu/scroll2.png',
+      '/projects/branddu/about.png'
+    ]
+  },
+  {
+    slug: 'wiwo',
+    title: 'WIWO',
+    year: '2025',
+    category: 'App Movil · Reclutamiento HORECA & Retail',
+    description: 'WIWO es la startup colombiana que conecta empresas del sector HORECA y Retail con mas de 50.000 talentos verificados. Desarrollamos la aplicacion movil completa: el sistema de matching tipo Tinder para contratar personal operativo, las entrevistas preliminares con IA, el CRM de candidatos integrado, el sistema de reputacion mutua y la integracion con un bot de WhatsApp para contratar sin necesidad de descargar la app. Construido con React Native junto al equipo de producto de WIWO.',
+    tags: ['React Native', 'TypeScript', 'IA', 'WhatsApp Bot', 'CRM', 'HORECA'],
+    url: 'https://wiwo.com.co/',
+    cover: '/projects/wiwo/cover.png',
+    gallery: [
+      '/projects/wiwo/cover.png',
+      '/projects/wiwo/scroll1.png',
+      '/projects/wiwo/scroll2.png',
+      '/projects/wiwo/play-screens.png',
+      '/projects/wiwo/app-screens.png'
+    ],
+    isWide: true
+  },
+  {
+    slug: 'blooma',
+    title: 'Blooma.io',
+    year: '2024',
+    category: 'SaaS · Diseno por suscripcion',
+    description: 'Gestor de proyectos de diseno y desarrollo tanto para empresas como para freelance donde encontraras todo lo necesario para tus trabajos, proyectos y ofertas.',
+    tags: ['UI/UX', 'Plataforma Web', 'Creditos & Pagos', 'Branding'],
+    url: 'https://blooma.io',
+    cover: '/projects/blooma/landing1.png',
+    gallery: [
+      '/projects/blooma/landing1.png',
+      '/projects/blooma/dashboard.png',
+      '/projects/blooma/projects.png',
+      '/projects/blooma/wallet.png',
+      '/projects/blooma/portfolio.png'
+    ]
+  },
+  {
+    slug: 'inspecol',
+    title: 'Inspecol',
+    year: '2026',
+    category: 'Web corporativa · Inspeccion de gas',
+    description: 'Landing de inspeccion y certificacion de instalaciones de gas natural y GLP, con envio de PQRS directo al correo empresarial y multiples canales de contacto para agendar inspecciones y citas.',
+    tags: ['Sitio Corporativo', 'Formulario PQRS', 'WhatsApp', 'Normativa'],
+    url: 'https://inspecol.com',
+    cover: '/projects/inspecol/5.png',
+    gallery: [
+      '/projects/inspecol/5.png',
+      '/projects/inspecol/sec.png',
+      '/projects/inspecol/radicar.png'
+    ]
+  }
+];
+
+function initProjectsModal() {
+  const projectsGrid = document.getElementById('projects-grid');
+  if (!projectsGrid) return;
+
+  // Render Projects
+  projectsGrid.innerHTML = PROJECTS.map(
+    project => `
+      <a href="#" class="project-card ${project.isWide ? 'project-card--wide' : ''} reveal" tabindex="0" role="button" data-slug="${project.slug}" aria-haspopup="dialog" aria-label="Ver detalle del proyecto ${project.title}">
+        <div class="project-img">
+          <img src="${project.cover}" alt="Vista previa ${project.title}" loading="lazy">
+          <div class="project-overlay">
+            <span class="project-view">Ver proyecto ↗</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <div>
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-desc">${project.description}</p>
+          </div>
+        </div>
+      </a>
+    `
+  ).join('');
+
+  // Setup Modal
+  const modal = document.getElementById('project-modal');
+  const modalContent = document.getElementById('project-modal-content');
+  if (!modal || !modalContent) return;
+  
+  let lastFocusedElement = null;
+
+  function openProjectModal(slug) {
+    const project = PROJECTS.find(p => p.slug === slug);
+    if (!project) return;
+
+    modalContent.innerHTML = `
+      <div style="text-transform: uppercase; letter-spacing: 2px; font-weight: 600; font-size: 0.875rem; color: var(--grey-dark);">${project.year} · ${project.category}</div>
+      <h2 class="modal-title" id="modal-title">${project.title}<span class="serif-accent italic text-grey">.</span></h2>
+      <div class="modal-body">
+        <p class="modal-desc">${project.description}</p>
+        <div>
+          <div class="modal-tags">
+            ${project.tags.map(tag => `<span class="tag tag-dark">${tag}</span>`).join('')}
+          </div>
+          <a class="btn-primary modal-cta" href="${project.url}" target="_blank" rel="noopener noreferrer">Visitar sitio ↗</a>
+        </div>
+      </div>
+      <div class="modal-gallery">
+        ${project.gallery.map((src, index) => `<img src="${src}" alt="${project.title} — captura ${index + 1}" loading="lazy">`).join('')}
+      </div>
+    `;
+
+    lastFocusedElement = document.activeElement;
+    modal.hidden = false;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => modal.classList.add('open'));
+    });
+    document.body.classList.add('no-scroll');
+    const closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeProjectModal() {
+    if (modal.hidden) return;
+
+    modal.classList.add('closing');
+    setTimeout(() => {
+      modal.classList.remove('open', 'closing');
+      modal.hidden = true;
+      document.body.classList.remove('no-scroll');
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }, 450);
+  }
+
+  projectsGrid.addEventListener('click', event => {
+    const card = event.target.closest('.project-card');
+    if (card) {
+      event.preventDefault();
+      openProjectModal(card.dataset.slug);
+    }
+  });
+
+  projectsGrid.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const card = event.target.closest('.project-card');
+    if (card) {
+      event.preventDefault();
+      openProjectModal(card.dataset.slug);
+    }
+  });
+
+  modal.addEventListener('click', event => {
+    if (event.target.closest('[data-modal-close]')) closeProjectModal();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeProjectModal();
+  });
+
+  // Re-initialize scroll reveal for the newly injected project cards
+  if (typeof initScrollReveal === 'function') {
+    initScrollReveal();
+  }
+}
